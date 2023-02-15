@@ -7,14 +7,12 @@ function drawCalc() {
     for (let i = 0; i < 6; i++) {
         const row = document.createElement("row");
         row.classList.add("row");
-        row.style.backgroundColor = "black";
         calculator.appendChild(row);
         if (i > 0) {
             for (let j = 0; j < 4; j++) {
                 const button = document.createElement("button");
                 button.classList.add("button");
                 button.style.color = "white";
-                button.style.backgroundColor = "grey";
                 button.textContent = buttons[counter];
                 row.appendChild(button);
                 counter ++;

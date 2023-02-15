@@ -1,18 +1,30 @@
+.top {
+    margin: auto;
+    width: 100%;
+    border: 3px black;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+
 #calculator {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: space-between;
-    width: 500px;
+    width: 60%;
     height: 500px;
-    border: 40px;
+    border: 20px black;
     border-style: solid;
+    padding: 20px;
+    background-color:black;
 }
 
 .row {
     display: flex;
     flex: 1;
     justify-content: space-evenly;
+    background-color: #696969;
 }
 
 .button {
@@ -21,6 +33,7 @@
     height: 60px;
     justify-content: center;
     align-items: center;
+    background-color: #778899;
 }
 
 .display {
