@@ -1,13 +1,13 @@
 const calculator = document.querySelector("#calculator");
 drawCalc();
 let num1 = 0, operator, num2 = 0;
-let operating = false;
+let operating = false, decimalize = false, eq = false;
 let operators = ["+", ,"-", "÷", "x"]
 let specials = ["!", "√", "x^2"]
 
 function drawCalc() {
     let counter = 0;
-    let buttonContent = ["!", "√", "x^2", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
+    let buttonContent = ["!", "√", "+/-", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
     const row = document.createElement("row");
     row.classList.add("row");
     calculator.appendChild(row);
@@ -28,15 +28,10 @@ function drawCalc() {
             button.textContent = buttonContent[counter];
             button.onclick = function() {
                 selection = this.textContent;
-                if (isNumber(selection) || selection == ".") {
-                    if (display.textContent == "0") {
-                        if (selection == ".") {
-                            display.textContent = "0.";
-                        }
-                        else {
-                            display.textContent = selection;
-                        }
-                        
+                if (isNaN(selection) == false) {
+                    if (display.textContent == "0" || eq == true) {
+                        display.textContent = selection;
+                        eq = false;
                     }
                     else if (operating == true) {
                         display.textContent = selection;
@@ -46,25 +41,43 @@ function drawCalc() {
                         display.textContent += selection;
                     }
                 }
-
                 else {
                     if (selection == "C") {
                         display.textContent = 0;
                         num1 = 0;
+                        operating = false;
+                        operator = undefined;
+                        decimalize = false;
+                    }
+                    if (selection == "." && decimalize == false) {
+                        display.textContent += ".";
+                        decimalize = true;
+                    }
+                    if (selection == "+/-") {
+                        display.textContent = +display.textContent * -1;
+                    }
+                    if (selection == "=") {
+                        display.textContent = operate(operator, num1, display.textContent);
+                        num1 = 0;
+                        decimalize = true;
+                        eq = true;
                     }
                     if (specials.includes(selection)) {
                         display.textContent = operate(selection, display.textContent);
+                        operating = true;
+                        decimalize = true;
                     }
                     if (operators.includes(selection)){
-                        
-                        if (num1 == 0) {
-                            operator = selection;
+                        decimalize = true;
+                        if (num1 == 0) {  
                             num1 = display.textContent;
+                            operator = selection;
                             console.log("Operator: " + operator + " number: " + num1);
                             
                         }
                         else {
                             display.textContent = operate(operator, num1, display.textContent);
+                            operator = selection;
                             num1 = display.textContent;
                         }
                         operating = true;
@@ -83,20 +96,36 @@ function operate (operator, x, y = undefined) {
     if (operator == "!") {
         result = factorial (+x);
     }
+    else if (operator == "√") {
+        result = squareRoot(x);
+    }
     else if (operator == "+") {
         result = add(+x, +y);
     }
-    if (result > 999999999999999999) {
+    else if (operator == "-") {
+        result = subtract(+x, +y);
+    }
+    else if (operator == "x") {
+        result = multiply(+x, +y);
+    }
+    else if (operator == "÷") {
+        result = divide(+x, +y);
+    }
+    else {
+        if (y == undefined) {
+            return x;
+        }
+        else {
+            return y;
+        }
+    }
+    if (result > 9999999999999999 || -result < -9999999999999) {
         result = "ERROR";
     }
+    decimalize = false;
     return result;
 }
 
-function isNumber (x) {
-    if (isNaN(x) == false) {
-        return true;
-    }
-}
 
 
 function add(x, y) {
@@ -132,6 +161,6 @@ function squared(x) {
 };
   
 function squareRoot(x) {
-    return x / x;
+    return Math.sqrt(x);
 }
   
