@@ -3,11 +3,11 @@ drawCalc();
 let num1 = 0, operator, num2 = 0;
 let operating = false, decimalize = false, eq = false;
 let operators = ["+", ,"-", "÷", "x"]
-let specials = ["!", "√", "sqr"]
+let specials = ["!", "√", "x^2"]
 
 function drawCalc() {
     let counter = 0;
-    let buttonContent = ["!", "√", "sqr", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
+    let buttonContent = ["!", "√", "x^2", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
     const row = document.createElement("row");
     row.classList.add("row");
     calculator.appendChild(row);
@@ -131,7 +131,7 @@ function operate (operator, x, y = undefined) {
     else if (operator == "÷") {
         result = divide(+x, +y);
     }
-    else if (operator == "sqr") {
+    else if (operator == "x^2") {
         result = squared(+x);
     }
     else {
