@@ -14,10 +14,10 @@
     align-items: space-between;
     width: 60%;
     height: 500px;
-    border: 20px black;
+    border: 40px black;
     border-style: solid;
     padding: 20px;
-    background-color:black;
+    background-color:#696969;
 }
 
 .row {
@@ -46,5 +46,6 @@
     border: 10px;
     font-size: 45px;
     padding: 5px;
+    border: 5px #006400;
 
 }
