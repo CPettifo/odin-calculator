@@ -58,7 +58,6 @@ function drawCalc() {
                     }
                     if (selection == "=") {
                         display.textContent = operate(operator, num1, display.textContent);
-                        num1 = 0;
                         decimalize = true;
                         eq = true;
                     }
