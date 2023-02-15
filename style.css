@@ -12,8 +12,8 @@
     flex-direction: column;
     justify-content: space-around;
     align-items: space-between;
-    width: 60%;
-    height: 500px;
+    width: 320px;
+    height: 480px;
     border: 40px black;
     border-style: solid;
     padding: 20px;
@@ -23,8 +23,9 @@
 .row {
     display: flex;
     flex: 1;
-    justify-content: space-evenly;
+    justify-content: space-between;
     background-color: #696969;
+    padding: 10px;
 }
 
 .button {
