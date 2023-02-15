@@ -72,7 +72,6 @@ function drawCalc() {
                         decimalize = true;
                     }
                     if (selection == "=") {
-                        console.log("Num1 before operation: " + num1)
                         num2 = num1;
                         num1 = display.textContent;
                         display.textContent = operate(operator, num1, num2);
@@ -90,10 +89,8 @@ function drawCalc() {
                         if (num1 == 0) {  
                             num1 = display.textContent;
                             operator = selection;
-                            console.log("Operator: " + operator + " number: " + num1);
                         }
                         else {
-                            console.log("Operator: " + operator + " number: " + num1);
                             display.textContent = operate(operator, num1, display.textContent);
                             operator = selection;
                             num1 = display.textContent;
@@ -120,16 +117,17 @@ function operate (operator, x, y = undefined) {
         result = squareRoot(x);
     }
     else if (operator == "+") {
-        result = add(+x, +y);
+        result = add(parseInt(x), parseInt(y));
     }
     else if (operator == "-") {
-        result = subtract(+x, +y);
+        result = subtract(x, y);
+        console.log(x, y)
     }
     else if (operator == "x") {
-        result = multiply(+x, +y);
+        result = multiply(parseInt(x), parseInt(y));
     }
     else if (operator == "÷") {
-        result = divide(+x, +y);
+        result = divide(parseInt(x), parseInt(y));
     }
     else if (operator == "x^2") {
         result = squared(+x);
@@ -146,6 +144,7 @@ function operate (operator, x, y = undefined) {
         result = "ERROR";
     }
     decimalize = false;
+    console.log(result);
     return result;
 }
 
@@ -156,7 +155,8 @@ function add(x, y) {
 };
   
 function subtract(x, y) {
-    return x - y;
+    let w = x - y;
+    return w;
 };
 
 function multiply(x, y) {
