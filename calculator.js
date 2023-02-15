@@ -3,11 +3,11 @@ drawCalc();
 let num1 = 0, operator, num2 = 0;
 let operating = false, decimalize = false, eq = false;
 let operators = ["+", ,"-", "÷", "x"]
-let specials = ["!", "√", "x^2"]
+let specials = ["!", "√", "sqr"]
 
 function drawCalc() {
     let counter = 0;
-    let buttonContent = ["!", "√", "+/-", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
+    let buttonContent = ["!", "√", "sqr", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
     const row = document.createElement("row");
     row.classList.add("row");
     calculator.appendChild(row);
@@ -26,6 +26,24 @@ function drawCalc() {
             button.classList.add("button");
             button.style.color = "white";
             button.textContent = buttonContent[counter];
+            if (i == 1 && j >= 0 && j < 3) {
+                button.style.backgroundColor = "yellow";
+                button.style.color = "black";
+            }
+            else if (j == 3) {
+                button.style.backgroundColor = "darkorange";
+            }
+            else if (i == 5 && j == 0) {
+                button.style.backgroundColor = "darkgreen";
+            }
+            else if (i == 5 && j == 2) {
+                button.style.backgroundColor = "darkgreen";
+            }
+            else {
+                button.style.backgroundColor = "darkblue";
+            }
+
+
             button.onclick = function() {
                 selection = this.textContent;
                 if (isNaN(selection) == false) {
@@ -53,11 +71,12 @@ function drawCalc() {
                         display.textContent += ".";
                         decimalize = true;
                     }
-                    if (selection == "+/-") {
-                        display.textContent = +display.textContent * -1;
-                    }
                     if (selection == "=") {
-                        display.textContent = operate(operator, num1, display.textContent);
+                        console.log("Num1 before operation: " + num1)
+                        num2 = num1;
+                        num1 = display.textContent;
+                        display.textContent = operate(operator, num1, num2);
+                        
                         decimalize = true;
                         eq = true;
                     }
@@ -72,12 +91,13 @@ function drawCalc() {
                             num1 = display.textContent;
                             operator = selection;
                             console.log("Operator: " + operator + " number: " + num1);
-                            
                         }
                         else {
+                            console.log("Operator: " + operator + " number: " + num1);
                             display.textContent = operate(operator, num1, display.textContent);
                             operator = selection;
                             num1 = display.textContent;
+                            
                         }
                         operating = true;
                     }
@@ -89,6 +109,7 @@ function drawCalc() {
         }
     }
 }
+
 
 function operate (operator, x, y = undefined) {
     let result;
@@ -109,6 +130,9 @@ function operate (operator, x, y = undefined) {
     }
     else if (operator == "÷") {
         result = divide(+x, +y);
+    }
+    else if (operator == "sqr") {
+        result = squared(+x);
     }
     else {
         if (y == undefined) {
