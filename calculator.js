@@ -1,7 +1,6 @@
 const calculator = document.querySelector("#calculator");
 drawCalc();
-let num1 = 0;
-let operator = "";
+let num1, operator, num2;
 let operators = ["+", ,"-", "÷", "x", "!", "√", "x^2"]
 
 function drawCalc() {
@@ -26,16 +25,31 @@ function drawCalc() {
             button.textContent = buttonContent[counter];
             button.onclick = function() {
                 selection = this.textContent;
-                if (selection == "c") {
-                    display.textContent = 0;
-                }
-                else if (isNumber(selection)) {
+                
+                if (isNumber(selection) || selection == ".") {
                     if (display.textContent == "0") {
-                        display.textContent = selection;
+                        if (selection == ".") {
+                            display.textContent = "0.";
+                        }
+                        else {
+                            display.textContent = selection;
+                        }
+                        
                     }
                     else {
                         display.textContent += selection;
                     }
+                }
+
+                else {
+                    if (selection == "C") {
+                        display.textContent = 0;
+                        num1 = undefined;
+                    }
+                    if (operators.contains(selection)){
+                        display.textContent = "operate";
+                    }
+
                 }
             };
             row.appendChild(button);
