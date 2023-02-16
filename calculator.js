@@ -123,10 +123,10 @@ function operate (operator, y, x = undefined) {
     }
     y = Number(y);
     if (operator == "!") {
-        result = factorial (+x);
+        result = factorial (+y);
     }
     else if (operator == "√") {
-        result = squareRoot(x);
+        result = squareRoot(y);
     }
     else if (operator == "+") {
         result = add(x, y);
