@@ -116,7 +116,7 @@ function drawCalc() {
 }
 
 
-function operate (operator, x, y = undefined) {
+function operate (operator, y, x = undefined) {
     let result;
     if (operator == "!") {
         result = factorial (+x);
@@ -152,7 +152,7 @@ function operate (operator, x, y = undefined) {
         result = "ERROR";
     }
     decimalize = false;
-    console.log(result);
+    console.log(x, operator, y, "= " ,result);
     return result;
 }
 
@@ -172,7 +172,8 @@ function multiply(x, y) {
 };
 
 function divide (x, y) {
-    return (x / y) * 100;
+    let result = (x / y);
+    return result;
 }
 
 
