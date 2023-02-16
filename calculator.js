@@ -2,12 +2,12 @@ const calculator = document.querySelector("#calculator");
 drawCalc();
 let num1 = 0, operator, num2 = 0;
 let operating = false, decimalize = false, eq = false;
-let operators = ["+", ,"-", "÷", "x"]
+let operators = ["+", ,"-", "/", "x"]
 let specials = ["!", "√", "x^2"]
 
 function drawCalc() {
     let counter = 0;
-    let buttonContent = ["!", "√", "x^2", "÷", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
+    let buttonContent = ["!", "√", "x^2", "/", "7", "8", "9", "x", "4", "5", "6", "-", "1", "2", "3", "+", "C", "0", ".", "="]
     const row = document.createElement("row");
     row.classList.add("row");
     calculator.appendChild(row);
@@ -118,6 +118,10 @@ function drawCalc() {
 
 function operate (operator, y, x = undefined) {
     let result;
+    if (x !== undefined) {
+        x = Number(x);
+    }
+    y = Number(y);
     if (operator == "!") {
         result = factorial (+x);
     }
@@ -125,17 +129,16 @@ function operate (operator, y, x = undefined) {
         result = squareRoot(x);
     }
     else if (operator == "+") {
-        result = add(parseInt(x), parseInt(y));
+        result = add(x, y);
     }
     else if (operator == "-") {
         result = subtract(x, y);
-        console.log(x, y)
     }
     else if (operator == "x") {
-        result = multiply(parseInt(x), parseInt(y));
+        result = multiply(x, y);
     }
-    else if (operator == "÷") {
-        result = divide(parseInt(x), parseInt(y));
+    else if (operator == "/") {
+        result = divide(x, y);
     }
     else if (operator == "x^2") {
         result = squared(+x);
@@ -148,7 +151,7 @@ function operate (operator, y, x = undefined) {
             return y;
         }
     }
-    if (result > 9999999999999999 || -result < -9999999999999 || result.toString().length > 10) {
+    if (result.toString().length > 12) {
         result = "ERROR";
     }
     decimalize = false;
@@ -172,8 +175,17 @@ function multiply(x, y) {
 };
 
 function divide (x, y) {
-    let result = (x / y);
-    return result;
+    let result;
+    if (x !== Math.floor(x)) {
+        result = parseFloat(x) / parseFloat(y);
+        let string = result.toString();
+        let points = string.split(".");
+        console.log(points);
+        points = points[1].length;
+        return result.toFixed(points);
+    }
+    return parseFloat(x) / parseFloat(y);
+
 }
 
 
@@ -315,14 +327,12 @@ function operate (operator, y, x = undefined) {
     }
     else if (operator == "-") {
         result = subtract(x, y);
-        console.log(x, y)
     }
     else if (operator == "x") {
         result = multiply(x, y);
     }
     else if (operator == "÷") {
         result = division(x, y);
-        console.log("got here");
     }
     else if (operator == "x^2") {
         result = squared(+y);
