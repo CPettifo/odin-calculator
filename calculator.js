@@ -55,7 +55,7 @@ function drawCalc() {
                         display.textContent = selection;
                         operating = false;
                     }
-                    else {
+                    else if (display.textContent.length < 12) {
                         display.textContent += selection;
                     }
                 }
