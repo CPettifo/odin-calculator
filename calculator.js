@@ -148,7 +148,7 @@ function operate (operator, y, x = undefined) {
             return y;
         }
     }
-    if (result > 9999999999999999 || -result < -9999999999999) {
+    if (result > 9999999999999999 || -result < -9999999999999 || result.toString().length > 10) {
         result = "ERROR";
     }
     decimalize = false;
