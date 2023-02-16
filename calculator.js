@@ -92,9 +92,10 @@ function drawCalc() {
                     }
                     if (operators.includes(selection) && operating == false){
                         decimalize = true;
-                        if (num1 == 0) {  
+                        if (num1 == 0 || eq == true) {  
                             num1 = display.textContent;
                             operator = selection;
+                            eq = false;
                         }
                         else {
                             num2 = display.textContent;
@@ -171,7 +172,7 @@ function multiply(x, y) {
 };
 
 function divide (x, y) {
-    return x / y;
+    return (x / y) * 100;
 }
 
 
