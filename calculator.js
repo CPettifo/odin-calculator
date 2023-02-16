@@ -90,16 +90,17 @@ function drawCalc() {
                         operating = true;
                         decimalize = true;
                     }
-                    if (operators.includes(selection)){
+                    if (operators.includes(selection) && operating == false){
                         decimalize = true;
                         if (num1 == 0) {  
                             num1 = display.textContent;
                             operator = selection;
                         }
                         else {
-                            display.textContent = operate(operator, num1, display.textContent);
+                            num2 = display.textContent;
+                            display.textContent = operate(operator, num1, num2);
                             operator = selection;
-                            num1 = display.textContent;
+                            num2 = display.textContent;
                             
                         }
                         operating = true;
