@@ -71,11 +71,17 @@ function drawCalc() {
                         display.textContent += ".";
                         decimalize = true;
                     }
-                    if (selection == "=") {
-                        num2 = num1;
-                        num1 = display.textContent;
+                    if (selection == "=" && operating == false) {
+                        if (eq == false) {
+                            num2 = num1;
+                            num1 = display.textContent;
+                        }
+                        else {
+                            num2 = display.textContent;
+                        }
+
                         display.textContent = operate(operator, num1, num2);
-                        
+                        num2 = display.textContent;
                         decimalize = true;
                         eq = true;
                     }
