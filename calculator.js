@@ -87,8 +87,8 @@ function drawCalc() {
                     }
                     if (specials.includes(selection)) {
                         display.textContent = operate(selection, display.textContent);
-                        operating = true;
                         decimalize = true;
+                        num1 = display.textContent;
                     }
                     if (operators.includes(selection) && operating == false){
                         decimalize = true;
@@ -141,7 +141,7 @@ function operate (operator, y, x = undefined) {
         result = divide(x, y);
     }
     else if (operator == "x^2") {
-        result = squared(+x);
+        result = squared(+y);
     }
     else {
         if (y == undefined) {
